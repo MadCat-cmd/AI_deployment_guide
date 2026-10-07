@@ -12,7 +12,10 @@ Download the Ollama from Official website `https://ollama.com/download/windows?u
 You can also download the Ollama manually, and install the `ollama.exe` like normal software
 
 
-**Change the Ollama**
+### Change the Ollama installation location
+
+If you use Ollama installation `exe` file manually install ollama, it doesn't provide any option the change your installation location. 
+But 
 
 ```
 OllamaSetup.exe /DIR="d:\some\location"
