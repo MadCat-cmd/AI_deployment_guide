@@ -97,16 +97,28 @@ The Model can be download in this link [Qwen3-8B-GGUF](https://huggingface.co/Qw
 After download the GGUF file, we put this file to the Ollama model path, which same as the `OLLAMA_MODELS` enviroment variable. 
 Here for instance is the `OLLAMA_MODELS` value `H:\Ollama_Models` 
 
-### Create model file and create ollama model
+### Create model file
 
 Create a work direactory, which contain the model file, this directory is used for the ollama deployment. 
 
 ```
 H:\Ollama_project\Qwen3-8B
 ```
+Create a file without any suffix called: 
+```
+Modelfile
+```
+The contain of this file is simple: 
+```
+FROM H:\Ollama_Models\Qwen3-8B-Q8_0.gguf
+```
+This is the simple model file， ollama support use `FROM H:\Ollama_Models\Qwen3-8B-Q8_0.gguf` syntax to import a outside model
 
 
+### create ollama model
+Go to the Modelfile directory and open cmd type following:
 
-
+```
+```
 
 
