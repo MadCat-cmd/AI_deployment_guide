@@ -119,6 +119,19 @@ This is the simple model file， ollama support use `FROM H:\Ollama_Models\Qwen3
 Go to the Modelfile directory and open cmd type following:
 
 ```
+ollama create qwen3-8b-local -f Modelfile
 ```
+
+after successful creation you can use following command to check the current available models: 
+```
+ollama list
+```
+
+the output should look like this:
+```
+NAME                         ID              SIZE      MODIFIED
+qwen3-8b-local-64k:latest    84364e471a44    8.7 GB    13 minutes ago
+```
+
 
 
