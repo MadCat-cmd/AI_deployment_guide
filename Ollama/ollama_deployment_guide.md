@@ -141,7 +141,69 @@ NAME                         ID              SIZE      MODIFIED
 qwen3-8b-local-64k:latest    84364e471a44    8.7 GB    13 minutes ago
 ```
 
-### run the model
+> Attention:
+> 
+> If you don't change the model location with creat the `OLLAMA_MODELS` variable
+> The creation will still produce the huge copy cache to your C: disk on this locaciont
+> `C:\Users\TUTU\.ollama`
+>
+
+### What happen in the creation process
+
+
+We assuem the Model file is stored:
+```
+D:\AI\Models\Qwen3-8B-Q4_K_M.gguf
+```
+and the `OLLAMA_MODELS` value:
+```
+OLLAMA_MODELS=D:\AI\Ollama\Models
+```
+When you execute this command `ollama create qwen3-local -f Modelfile`. You may see following output:
+```
+gathering model components
+copying file sha256:408b955510e196121c1c375201744783b5c9a43c7956d73fc78df54c66e883d6 100%
+parsing GGUF
+using existing layer sha256:408b955510e196121c1c375201744783b5c9a43c7956d73fc78df54c66e883d6
+creating new layer sha256:b13b467a485cf95db562958b3d1d8ea251867eb7bda8115bf37a5ee85ab77f7a
+writing manifest
+success
+```
+
+Following process is happended
+```
+D:\AI\Models\
+└── Qwen3-8B-Q4_K_M.gguf
+          │
+          │ 读取 + 计算 SHA256
+          │
+          ▼
+D:\AI\Ollama\Models\
+└── blobs\
+    └── sha256-408b955510e196121c1c375201744783b5c9a43c7956d73fc78df54c66e883d6
+```
+
+Then Ollama will create an other directory:
+```
+D:\AI\Ollama\Models\
+└── manifests\
+    └── ...
+        └── ...
+```
+and this `manifests` directory contian following content:
+```
+这个模型名字
+    ↓
+应该使用哪个 blob
+    ↓
+blob 的 SHA256 是什么
+    ↓
+模型配置是什么
+```
+the blob directory contain the big data. 
+
+
+## Step 5 run the model (start the conversation)
 After the creation you can run the model locally with followign command:
 ```
 ollama run <model-name>
@@ -151,6 +213,50 @@ The <model-name> is the name shown in `ollama list`. In this case for example:
 ollama run qwen3-8b-local-64K
 ```
 then you can start the conversation. 
+
+## Step 6 Stop the model 
+When you quit the conversation you can type `/bye` in dialog.
+
+In the cmd dialog interface you can also type `/?` or `/help` to check the conversation command.
+
+Even you stop the conversation, the ollama server is still running on background. The ollama windows architecture look like following:
+
+```
+Windows
+  │
+  ├── Ollama App / Server
+  │       │
+  │       └── localhost:11434
+  │
+  └── CMD
+          │
+          └── ollama run qwen3-8b-local
+```
+
+That mean if your ollama application has been open and running on tray. The server is still running. you can check the html server via this website. 
+```
+http://127.0.0.1:11434/v1/models
+```
+on the website you can see following output:
+```
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "qwen3-8b-local-64k:latest",
+      "object": "model",
+      "created": 1791477112,
+      "owned_by": "library"
+    }
+  ]
+}
+```
+
+This architechture mean even you stop the conversation from `cmd`, other agent/harness/python software can still use your local deployed Model to start the conversation, as long as Ollama is running on background. 
+Other application can use the ollama html interface with web address `http://127.0.0.1:11434/v1` to access the model. (same as add a third party API provider)
+
+# d
+
 
 
 
