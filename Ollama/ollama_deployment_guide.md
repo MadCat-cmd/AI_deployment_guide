@@ -12,7 +12,7 @@ Download the Ollama from Official website `https://ollama.com/download/windows?u
 You can also download the Ollama manually, and install the `ollama.exe` like normal software
 
 
-### Step 2 (option but recommand) Change the Ollama installation location
+### (option but recommand) Change the Ollama installation location
 
 If you use Ollama installation `exe` file manually install ollama, it doesn't provide any option the change your installation location. 
 But you can use the following command to change the Ollama installation location. 
@@ -42,7 +42,12 @@ This will consume huge place on you C Disk, when you download the model in futur
 
 After you create the `OLLAMA_MODELS` manually, the ollama application must be restarted, otherwise new location will not be used. 
 
-### Download the Models
+### Setup the ollama to enviroment variable
+If you want to use ollama command on arbitrary cmd location you need add the ollama install path to the enviroement variable `path` in **user account**. 
+
+
+
+## Step 2 Download the Models
 You can directly download the model via ollama and run it directly. For instance you want to run `qwen3:4b` model, you can simply type this command in console. 
 If you run the model first time, it will automatically download the model file and save the model file to the path, which you have previously assigned. 
 
@@ -97,7 +102,7 @@ The Model can be download in this link [Qwen3-8B-GGUF](https://huggingface.co/Qw
 After download the GGUF file, we put this file to the Ollama model path, which same as the `OLLAMA_MODELS` enviroment variable. 
 Here for instance is the `OLLAMA_MODELS` value `H:\Ollama_Models` 
 
-### Create model file
+## Step 3: Create model file
 
 Create a work direactory, which contain the model file, this directory is used for the ollama deployment. 
 
@@ -115,7 +120,10 @@ FROM H:\Ollama_Models\Qwen3-8B-Q8_0.gguf
 This is the simple model file， ollama support use `FROM H:\Ollama_Models\Qwen3-8B-Q8_0.gguf` syntax to import a outside model
 
 
-### create ollama model
+## Step 4: create ollama model
+After the model has been downloaded, you need register the model as it's own model object. Which can be managed by ollama, this process is 
+the model creation.
+
 Go to the Modelfile directory and open cmd type following:
 
 ```
@@ -132,6 +140,22 @@ the output should look like this:
 NAME                         ID              SIZE      MODIFIED
 qwen3-8b-local-64k:latest    84364e471a44    8.7 GB    13 minutes ago
 ```
+
+### run the model
+After the creation you can run the model locally with followign command:
+```
+ollama run <model-name>
+```
+The <model-name> is the name shown in `ollama list`. In this case for example:
+```
+ollama run qwen3-8b-local-64K
+```
+then you can start the conversation. 
+
+
+
+
+
 
 
 
