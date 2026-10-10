@@ -252,8 +252,15 @@ on the website you can see following output:
 }
 ```
 
-This architechture mean even you stop the conversation from `cmd`, other agent/harness/python software can still use your local deployed Model to start the conversation, as long as Ollama is running on background. 
+This ollama architechture mean even you stop the conversation from `cmd`, other agent/harness/python software can still use your local deployed Model to start the conversation, as long as Ollama is running on background. 
 Other application can use the ollama html interface with web address `http://127.0.0.1:11434/v1` to access the model. (same as add a third party API provider)
+
+If you want to release the model immediately from GPU VRAM you should use following command:
+```
+ollama stop <model-name>
+```
+
+With `ollama ps` command you can check the current running model & occupation of vram
 
 # d
 
