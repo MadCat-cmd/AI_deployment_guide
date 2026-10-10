@@ -260,7 +260,14 @@ If you want to release the model immediately from GPU VRAM you should use follow
 ollama stop <model-name>
 ```
 
-With `ollama ps` command you can check the current running model & occupation of vram
+With `ollama ps` command you can check the current running model & occupation of vram, following show a example of the a output of `ollama ps` 
+
+```
+NAME                         ID              SIZE     PROCESSOR    CONTEXT    RUNNER      UNTIL
+qwen3-8b-local-64k:latest    84364e471a44    14 GB    100% GPU     40960      llamacpp    4 minutes from now
+```
+
+If you want to completly shut down the ollama server include the webserver `http://127.0.0.1:11434/v1` you need simply exit the ollama application from tray
 
 # d
 
